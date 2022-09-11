@@ -30,3 +30,11 @@ jobs:
       - name: Release for windows
         if: matrix.os == 'windows-latest'
         run: yarn make
+
+      - name: Release for windows
+        if: matrix.os == 'macos-latest'
+        run: yarn make
+
+      - name: Release for windows
+        if: matrix.os == 'ubuntu-latest'
+        run: yarn make
