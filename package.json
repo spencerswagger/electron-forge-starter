@@ -1,6 +1,6 @@
 {
   "name": "hangzhou_ssg_application",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "A demo application for Hangzhou SSG Group",
   "main": "src/index.js",
   "scripts": {
@@ -26,10 +26,7 @@
       },
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "electron_forge_app"
-          }
+          "name": "@electron-forge/maker-squirrel"
         },
         {
           "name": "@electron-forge/maker-deb",

@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
 
     steps:
       - name: Check out repo
@@ -77,4 +77,24 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_paths: '["out/make/*.dmg","out/make/*/*/*"]'
+          asset_paths: '["out/make/*.dmg","out/make/*/*/*.deb","out/make/*/*/*.rpm"]'
+
+      - name: Upload release asset for Windows
+        if: matrix.os == 'windows-latest'
+        uses: sekwah41/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: ./out/make/*/x64/*.exe
+          asset_name: hangzhou_ssg_application-${{ github.ref }}-x64.exe
+
+      - name: Upload release asset for Windows ARM
+        if: matrix.os == 'windows-latest'
+        uses: sekwah41/upload-release-assets@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: ./out/make/*/arm64/*.exe
+          asset_name: hangzhou_ssg_application-${{ github.ref }}-arm64.exe
