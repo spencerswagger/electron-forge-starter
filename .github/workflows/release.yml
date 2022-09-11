@@ -88,6 +88,7 @@ jobs:
           upload_url: ${{ needs.release.outputs.upload_url }}
           asset_path: ./out/make/*/x64/*.exe
           asset_name: hangzhou_ssg_application-${{ github.ref }}-x64.exe
+          asset_content_type: application/exe
 
       - name: Upload release asset for Windows ARM
         if: matrix.os == 'windows-latest'
@@ -98,3 +99,4 @@ jobs:
           upload_url: ${{ needs.release.outputs.upload_url }}
           asset_path: ./out/make/*/arm64/*.exe
           asset_name: hangzhou_ssg_application-${{ github.ref }}-arm64.exe
+          asset_content_type: application/exe
