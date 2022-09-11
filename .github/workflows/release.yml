@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
+      release_name: ${{ steps.create_release.outputs.name }}
 
     steps:
       - name: Create release
@@ -93,7 +94,7 @@ jobs:
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
           asset_path: ./out/make/*/x64/*.exe
-          asset_name: hangzhou_ssg_application-${{ steps.get_version.outputs.VERSION }}-x64.exe
+          asset_name: hangzhou_ssg_application-${{ needs.release.outputs.release_name }}-x64.exe
           asset_content_type: application/exe
 
       - name: Upload release asset for Windows ARM
@@ -104,5 +105,5 @@ jobs:
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
           asset_path: ./out/make/*/arm64/*.exe
-          asset_name: hangzhou_ssg_application-${{ steps.get_version.outputs.VERSION }}-arm64.exe
+          asset_name: hangzhou_ssg_application-${{ needs.release.outputs.release_name }}-arm64.exe
           asset_content_type: application/exe
