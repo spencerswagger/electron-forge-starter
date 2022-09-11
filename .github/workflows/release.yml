@@ -2,11 +2,32 @@ name: Release
 
 on:
   push:
-    branches: [ "master" ]
+    tags:
+      - "v*"
 
 jobs:
   release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+
+    steps:
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+
+  build:
     name: build and release electron app
+    needs: release
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -49,3 +70,11 @@ jobs:
       - name: Release for Linux ARM
         if: matrix.os == 'ubuntu-latest'
         run: yarn make -a arm64
+
+      - name: Upload assets
+        uses: alexellis/upload-assets@0.2.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: '["out/make/*]'
