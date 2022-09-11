@@ -1,8 +1,8 @@
 {
-  "name": "electron-forge-app",
-  "productName": "electron-forge-app",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "hgangzhou_ssg_application",
+  "productName": "Hangzhou SSG application",
+  "version": "0.0.1",
+  "description": "A demo application for Hangzhou SSG Group",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -33,18 +33,18 @@
           }
         },
         {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
           "name": "@electron-forge/maker-deb",
           "config": {}
         },
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "format": "ULFO"
+          }
         }
       ]
     }
@@ -55,6 +55,7 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.66",
     "@electron-forge/maker-deb": "^6.0.0-beta.66",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.66",
     "@electron-forge/maker-rpm": "^6.0.0-beta.66",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
     "@electron-forge/maker-zip": "^6.0.0-beta.66",
