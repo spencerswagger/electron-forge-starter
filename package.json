@@ -1,6 +1,5 @@
 {
-  "name": "hgangzhou_ssg_application",
-  "productName": "Hangzhou SSG application",
+  "name": "hangzhou_ssg_application",
   "version": "0.0.1",
   "description": "A demo application for Hangzhou SSG Group",
   "main": "src/index.js",
